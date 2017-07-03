@@ -1,3 +1,4 @@
+import exception.CircularDependencyException;
 import exception.InvalidLocationNameException;
 import model.Location;
 import model.Route;
@@ -11,7 +12,7 @@ public class SimpleLinkedLocationsTest {
 
 
     @Test
-    public void testFewLocationsLinkedInRowInReverseParentOrder() throws InvalidLocationNameException {
+    public void testFewLocationsLinkedInRowInReverseParentOrder() throws InvalidLocationNameException, CircularDependencyException {
         ArrayList<Location> unsortedLocations = new ArrayList<Location>();
 
         Location location1 = new Location('a');
@@ -38,7 +39,7 @@ public class SimpleLinkedLocationsTest {
     }
 
     @Test
-    public void testFewLocationsLinkedInRow() throws InvalidLocationNameException {
+    public void testFewLocationsLinkedInRow() throws InvalidLocationNameException, CircularDependencyException {
         ArrayList<Location> unsortedLocations = new ArrayList<Location>();
 
         Location location1 = new Location('a');

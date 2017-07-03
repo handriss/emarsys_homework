@@ -1,5 +1,6 @@
 package model;
 
+import exception.CircularDependencyException;
 import lombok.Getter;
 
 import java.util.*;
@@ -16,20 +17,23 @@ public class Route {
         this.unsortedLocations = unsortedLocations;
     }
 
-    public void sortLocations(){
+    public void sortLocations() throws CircularDependencyException {
         for(Location currentLocation : unsortedLocations){
             this.addLocation(currentLocation);
 
         }
     }
 
-    private void addLocation(Location location){
+    private void addLocation(Location location) throws CircularDependencyException {
 
         if(this.isLocationAlreadyContained(location)){
             return;
         }
 
         if(location.hasParent()){
+            if(this.checkCircularDependency(location)){
+                throw new CircularDependencyException("The Locations in the list are circularly linked!");
+            }
             this.addLocation(location.getParent());
         }
 
@@ -85,6 +89,35 @@ public class Route {
             }
         }
         return null;
+    }
+
+    private boolean checkCircularDependency(Location location){
+
+        if(!location.hasParent()){
+            return false;
+        }
+
+        Location slow, fast;
+        slow = fast = location;
+
+        while(true){
+
+            slow = slow.getParent();
+
+            if(slow == null){
+                return false;
+            }
+
+            if(fast.getParent().getParent() == null){
+                return false;
+            }else{
+                fast = fast.getParent().getParent();
+            }
+
+            if(slow == fast){
+                return true;
+            }
+        }
     }
 
 }
