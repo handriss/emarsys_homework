@@ -3,9 +3,7 @@ package model;
 import exception.InvalidLocationNameException;
 import lombok.Getter;
 import lombok.Setter;
-import lombok.ToString;
 
-@ToString
 public class Location {
 
     @Getter
@@ -24,7 +22,7 @@ public class Location {
         }
     }
 
-    public Location(String name) throws InvalidLocationNameException{
+    public Location(String name) throws InvalidLocationNameException {
 
         if(name.length() > 1){
             throw new InvalidLocationNameException("Name must be one character long!");
@@ -39,5 +37,12 @@ public class Location {
 
     public boolean hasParent(){
         return !(this.parent == null);
+    }
+
+    @Override
+    public String toString() {
+        return "Location{" +
+                "name=" + name +
+                '}';
     }
 }

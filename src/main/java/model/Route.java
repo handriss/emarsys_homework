@@ -1,14 +1,15 @@
 package model;
 
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.LinkedList;
-import java.util.Set;
+import lombok.Getter;
+
+import java.util.*;
 
 public class Route {
 
+    @Getter
     private ArrayList<Location> unsortedLocations;
 
+    @Getter
     private Set<LinkedList> interchangeableLocations = new HashSet<LinkedList>();
 
     public Route(ArrayList<Location> unsortedLocations){
@@ -31,31 +32,63 @@ public class Route {
             this.addLocation(location.getParent());
         }
 
-        if(interchangeableLocations.size() == 0){
 
-            LinkedList<Location> currentLinkedList = new LinkedList<Location>();
-            currentLinkedList.add(location);
+        Location firstChild = this.isItTheParentOfALocation(location);
+        if(firstChild == null){
+            this.insertNewLinkedListNode(location);
+        }else{
 
-            interchangeableLocations.add(currentLinkedList);
+//            I need to get the hashset in which the location' parent is
+            LinkedList containingLinkedList = getContainingLinkedList(firstChild);
+
+//            I need to insert the location right before its parent into that location
+            Integer index = containingLinkedList.indexOf(firstChild);
+            containingLinkedList.add(index, location);
+
         }
 
+
+    }
+
+    private void insertNewLinkedListNode(Location location){
+        LinkedList<Location> currentLinkedList = new LinkedList<Location>();
+        currentLinkedList.add(location);
+
+        interchangeableLocations.add(currentLinkedList);
     }
 
     private boolean isLocationAlreadyContained(Location location){
 
-        for(LinkedList currentLinkedList : interchangeableLocations){
-            System.out.println(currentLinkedList);
-        }
-
-        return false;
-    }
-
-    private boolean isItTheParentOfALocation(Location location){
-        for(Location currentLocation : unsortedLocations){
-            if(currentLocation.getParent() == location){
-                return true;
+        for(LinkedList<Location> currentLinkedList : this.interchangeableLocations){
+            for(Location currentLocation : currentLinkedList){
+                if(currentLocation == location){
+                    return true;
+                }
             }
         }
         return false;
     }
+
+    private Location isItTheParentOfALocation(Location location){
+
+        for(LinkedList<Location> currentLinkedList : this.interchangeableLocations){
+            for(Location currentLocation : currentLinkedList){
+                if(currentLocation.getParent() == location){
+                    return currentLocation;
+                }
+            }
+        }
+        return null;
+
+    }
+
+    private LinkedList getContainingLinkedList(Location location){
+        for(LinkedList currentLinkedList: this.interchangeableLocations){
+            if(currentLinkedList.contains(location)){
+                return currentLinkedList;
+            }
+        }
+        return null;
+    }
+
 }
