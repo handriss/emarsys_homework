@@ -11,12 +11,15 @@ public class Location {
     @Getter
     private Character name;
 
+//    A parent comes before the current location
     @Getter
     @Setter
     private Location parent = null;
 
     public Location(Character name) throws InvalidLocationNameException {
-        if (!(name >= 'a' && name <= 'z')) {
+        if (name >= 'a' && name <= 'z') {
+            this.name = name;
+        }else{
             throw new InvalidLocationNameException("Name must be represented by a lowercase character of the English alphabet!");
         }
     }
@@ -32,5 +35,9 @@ public class Location {
         else{
             this.name = name.charAt(0);
         }
+    }
+
+    public boolean hasParent(){
+        return !(this.parent == null);
     }
 }
