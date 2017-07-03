@@ -108,7 +108,9 @@ public class Route {
                 return false;
             }
 
-            if(fast.getParent().getParent() == null){
+            if(fast.getParent() == null){
+                return false;
+            }else if(fast.getParent().getParent() == null){
                 return false;
             }else{
                 fast = fast.getParent().getParent();

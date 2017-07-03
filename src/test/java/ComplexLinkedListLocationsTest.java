@@ -9,7 +9,7 @@ import org.junit.rules.ExpectedException;
 import java.util.ArrayList;
 import java.util.LinkedList;
 
-public class ComlexLinkedListLocationsTest {
+public class ComplexLinkedListLocationsTest {
 
     public final ExpectedException expectedException = ExpectedException.none();
 
