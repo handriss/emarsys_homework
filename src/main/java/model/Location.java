@@ -1,17 +1,18 @@
 package model;
 
 import exception.InvalidLocationNameException;
+import lombok.Getter;
+import lombok.Setter;
+import lombok.ToString;
 
-import java.util.Set;
-
+@ToString
 public class Location {
 
+    @Getter
     private Character name;
 
-    //A child az, akinek a jelenlegi node elott kell jonnie
-    // I am not sure yet if I need this field
-    private Set<Location> children = null;
-
+    @Getter
+    @Setter
     private Location parent = null;
 
     public Location(Character name) throws InvalidLocationNameException {
@@ -31,13 +32,5 @@ public class Location {
         else{
             this.name = name.charAt(0);
         }
-    }
-
-    public void setParent(Location parent){
-        this.parent = parent;
-    }
-
-    public Location getParent(){
-        return this.parent;
     }
 }

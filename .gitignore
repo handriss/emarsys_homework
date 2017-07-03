@@ -6,3 +6,4 @@
 *.ipr
 
 target/
+/README.md
