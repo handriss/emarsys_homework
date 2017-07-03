@@ -19,6 +19,7 @@ public class Route {
     public void sortLocations(){
         for(Location currentLocation : unsortedLocations){
             this.addLocation(currentLocation);
+
         }
     }
 
@@ -36,17 +37,12 @@ public class Route {
         Location firstChild = this.isItTheParentOfALocation(location);
         if(firstChild == null){
             this.insertNewLinkedListNode(location);
+
         }else{
-
-//            I need to get the hashset in which the location' parent is
             LinkedList containingLinkedList = getContainingLinkedList(firstChild);
-
-//            I need to insert the location right before its parent into that location
             Integer index = containingLinkedList.indexOf(firstChild);
             containingLinkedList.add(index, location);
-
         }
-
 
     }
 
@@ -73,7 +69,7 @@ public class Route {
 
         for(LinkedList<Location> currentLinkedList : this.interchangeableLocations){
             for(Location currentLocation : currentLinkedList){
-                if(currentLocation.getParent() == location){
+                if(currentLocation == location.getParent()){
                     return currentLocation;
                 }
             }

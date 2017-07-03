@@ -15,7 +15,7 @@ public class LocationNamingTest {
     }
 
     @Test
-    public void testLocationCreationWithValidName(){
+    public void testLocationCreationWithValidName() {
 
         try{
             Location location = new Location("a");
@@ -31,7 +31,7 @@ public class LocationNamingTest {
     }
 
     @Test
-    public void testLocationCreationWithInvalidName(){
+    public void testLocationCreationWithInvalidName() {
         int i = 0;
         Location location;
 
@@ -75,7 +75,7 @@ public class LocationNamingTest {
     }
 
     @Test
-    public void testLocationCreationWithLongName(){
+    public void testLocationCreationWithLongName() {
         try{
             Location location = new Location("absd");
             Assert.fail();
@@ -83,4 +83,5 @@ public class LocationNamingTest {
             expectedException.expect(InvalidLocationNameException.class);
         }
     }
+
 }
