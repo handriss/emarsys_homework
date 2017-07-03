@@ -22,7 +22,7 @@ public class Location {
 
     public Location(String name) throws InvalidLocationNameException{
 
-        if(name.length() > 0){
+        if(name.length() > 1){
             throw new InvalidLocationNameException("Name must be one character long!");
         }
         else if (!name.matches("[a-z]")) {
