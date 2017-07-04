@@ -35,7 +35,6 @@ public class SimpleLinkedLocationsTest {
         Assert.assertEquals(locationsInRow.indexOf(location1), 2);
         Assert.assertEquals(locationsInRow.indexOf(location2), 1);
         Assert.assertEquals(locationsInRow.indexOf(location3), 0);
-
     }
 
     @Test

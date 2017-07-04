@@ -40,6 +40,7 @@ public class ComplexLinkedListLocationsTest {
 
 //        Since location2 and location3 has the same parent they may be at the 1st or 2nd index in the array
         Assert.assertEquals(locationsInRow.indexOf(location2) + locationsInRow.indexOf(location3), 3);
+
     }
 
     @Test

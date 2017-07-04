@@ -11,6 +11,9 @@ public class Route {
     private ArrayList<Location> unsortedLocations;
 
     @Getter
+    private ArrayList<Location> sortedLocations = new ArrayList<Location>();
+
+    @Getter
     private Set<LinkedList> interchangeableLocations = new HashSet<LinkedList>();
 
     public Route(ArrayList<Location> unsortedLocations){
@@ -20,8 +23,15 @@ public class Route {
     public void sortLocations() throws CircularDependencyException {
         for(Location currentLocation : unsortedLocations){
             this.addLocation(currentLocation);
-
         }
+
+        for(LinkedList<Location> currentLinkedList : this.interchangeableLocations){
+            for(Location currentLocation : currentLinkedList){
+                System.out.println(currentLocation);
+                this.sortedLocations.add(currentLocation);
+            }
+        }
+
     }
 
     private void addLocation(Location location) throws CircularDependencyException {
